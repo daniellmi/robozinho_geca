@@ -2,14 +2,12 @@
 #include "Sensor.h"
 #include "Leds.h"
 #include "Display.h"
-
 #include <Wire.h>
 
 #define IR1 A0
 #define IR2 A1
 #define IR3 A2
 #define IR4 A3
-
 
 Motor motor;
 Sensor sensor;
@@ -32,7 +30,7 @@ void loop() {
   if(sensor.readtSensor() <= 17) {
     motor.stop();
     delay(1000);
-    motor.back(200, 205);
+    motor.back(205, 200);
     delay(800);
     motor.right(200, 200);
     delay(505);
@@ -46,7 +44,7 @@ if (analogRead(IR1) > 300 && analogRead(IR2) > 300 && analogRead(IR3) > 400 && a
 
   motor.stop();
   delay(100);
-  motor.back(60, 65);
+  motor.back(65, 60);
   delay(150);
   leds.ReadLdrOnGreen();
   delay(1000);
@@ -67,7 +65,7 @@ if (analogRead(IR1) > 300 && analogRead(IR2) > 300 && analogRead(IR3) > 400 && a
   
   }
   else
-  motor.go(55, 60);
+  motor.go(60, 55);
  }
 
  // curva fechada pra esquerda (linha só do lado direito)
@@ -130,7 +128,3 @@ motor.go(65, 60);
    Serial.print("IR4: ");
       Serial.println(analogRead(IR4));
 }
-
-
-
-

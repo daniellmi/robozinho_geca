@@ -63,8 +63,8 @@ void Leds::ReadLdrOnGreen() {
   analogWrite(LEFT_RED, 0);
   analogWrite(RIGHT_RED, 0);
   delay(100);
-  int valorLED1RC = analogRead(RIGHT_LDR);
-  int valorLED2RC = analogRead(LEFT_LDR);
+  int valueLED1RC = analogRead(RIGHT_LDR);
+  int valueLED2RC = analogRead(LEFT_LDR);
   delay(10);
   analogWrite(LEFT_RED, 255);
   analogWrite(RIGHT_RED, 255);
@@ -72,8 +72,8 @@ void Leds::ReadLdrOnGreen() {
   analogWrite(LEFT_GREEN, 0);
   analogWrite(RIGHT_GREEN, 0);
   delay(100);
- int valorLED1GC = analogRead(RIGHT_LDR);
- int valorLED2GC = analogRead(LEFT_LDR);
+  int valueLED1GC = analogRead(RIGHT_LDR);
+  int valueLED2GC = analogRead(LEFT_LDR);
   delay(10);
   analogWrite(LEFT_GREEN, 255);
   analogWrite(RIGHT_GREEN, 255);
@@ -81,50 +81,47 @@ void Leds::ReadLdrOnGreen() {
   analogWrite(LEFT_BLUE, 0);
   analogWrite(RIGHT_BLUE, 0);
   delay(100);
-  int valorLED1BC = analogRead(RIGHT_LDR);
- int valorLED2BC = analogRead(LEFT_LDR);
+  int valueLED1BC = analogRead(RIGHT_LDR);
+  int valueLED2BC = analogRead(LEFT_LDR);
   delay(10);
   analogWrite(LEFT_BLUE, 255);
   analogWrite(RIGHT_BLUE, 255);
 
   //**************************COMPARANDO VALORES DO LED1**********************
- int valorDiferencaLED1R = valorLED1RC - RIGHT_RED_WHITE_VALUE;
- int valorDiferencaLED1G = valorLED1GC - RIGHT_GREEN_WHITE_VALUE;
- int valorDiferencaLED1B = valorLED1BC - RIGHT_BLUE_WHITE_VALUE;
+ int valueSubtractionLED1R = valueLED1RC - RIGHT_RED_WHITE_VALUE;
+ int valueSubtractionLED1G = valueLED1GC - RIGHT_GREEN_WHITE_VALUE;
+ int valueSubtractionLED1B = valueLED1BC - RIGHT_BLUE_WHITE_VALUE;
  //**************************COMPARANDO VALORES DO LED2**********************
- int valorDiferencaLED2R = valorLED2RC - LEFT_RED_WHITE_VALUE;
- int valorDiferencaLED2G = valorLED2GC - LEFT_GREEN_WHITE_VALUE;
- int valorDiferencaLED2B = valorLED2BC - LEFT_BLUE_WHITE_VALUE;
+ int valueSubtractionLED2R = valueLED2RC - LEFT_RED_WHITE_VALUE;
+ int valueSubtractionLED2G = valueLED2GC - LEFT_GREEN_WHITE_VALUE;
+ int valueSubtractionLED2B = valueLED2BC - LEFT_BLUE_WHITE_VALUE;
 
-  if (valorDiferencaLED1G < valorDiferencaLED1R && valorDiferencaLED1G < valorDiferencaLED1B) {
+  if (valueSubtractionLED1G < valueSubtractionLED1R && valueSubtractionLED1G < valueSubtractionLED1B) {
 
     //**************************COMPARANDO VALORES DOS VALORES DO LED1**********************
-   int DiferencaDaDiferenca1D = valorDiferencaLED1R - valorDiferencaLED1G;
-   int DiferencaDaDiferenca2D = valorDiferencaLED1B - valorDiferencaLED1G;
-   int MEDIA1 = (DiferencaDaDiferenca1D + DiferencaDaDiferenca2D) / 2;
+   int Subtraction_Subtraction1D = valueSubtractionLED1R - valueSubtractionLED1G;
+   int Subtraction_Subtraction2D = valueSubtractionLED1B - valueSubtractionLED1G;
+   int average1 = (Subtraction_Subtraction1D + Subtraction_Subtraction2D) / 2;
 
-    if (MEDIA1 > 20)
-    {
+    if (average1 > 20)
       colorRight = 'G';
-    }
-  }
-  else {
+    
+  else 
     colorRight = 'B';
-  }
-  if (valorDiferencaLED2G < valorDiferencaLED2R && valorDiferencaLED2G < valorDiferencaLED2B) {
+  
+  if (valueSubtractionLED2G < valueSubtractionLED2R && valueSubtractionLED2G < valueSubtractionLED2B) {
 
     //**************************COMPARANDO VALORES DO LED2**********************
-   int DiferencaDaDiferenca1E = valorDiferencaLED2R - valorDiferencaLED2G;
-   int DiferencaDaDiferenca2E = valorDiferencaLED2B - valorDiferencaLED2G;
-   int MEDIA2 = (DiferencaDaDiferenca1E + DiferencaDaDiferenca2E) / 2;
+   int Subtraction_Subtraction1E = valueSubtractionLED2R - valueSubtractionLED2G;
+   int Subtraction_Subtraction2E = valueSubtractionLED2B - valueSubtractionLED2G;
+   int average2 = (Subtraction_Subtraction1E + Subtraction_Subtraction2E) / 2;
 
-    if (MEDIA2 > 20) {
+    if (average2 > 20) 
       colorLeft = 'G';
-   }
-  }
-  else {
+   
+  else 
     colorLeft = 'B';
-  }
+  
 }
 
 char Leds::getColorRight() {
