@@ -40,12 +40,12 @@ public:
 
   void Motor::go(int speed, int speed2) {
 
-    analogWrite(ENA, speed2);
+    analogWrite(ENA, speed);
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
 
     // ao contrario
-    analogWrite(ENAT, speed);
+    analogWrite(ENAT, speed2);
     digitalWrite(IN1T, LOW);
     digitalWrite(IN2T, HIGH);
 
@@ -53,7 +53,7 @@ public:
     digitalWrite(IN3, HIGH);
     digitalWrite(IN4, LOW);
 
-    analogWrite(ENBT, speed);
+    analogWrite(ENBT, speed2);
     digitalWrite(IN3T, HIGH);
     digitalWrite(IN4T, LOW);
   }
@@ -119,14 +119,14 @@ public:
     digitalWrite(IN1T, LOW);
     digitalWrite(IN2T, LOW);
   }
-  void Motor::back(int speed) {
+  void Motor::back(int speed, int speed2) {
 
     analogWrite(ENA, speed);
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, HIGH);
 
     // ao contrario
-    analogWrite(ENAT, speed);
+    analogWrite(ENAT, speed2);
     digitalWrite(IN1T, HIGH);
     digitalWrite(IN2T, LOW);
 
@@ -134,7 +134,7 @@ public:
     digitalWrite(IN3, LOW);
     digitalWrite(IN4, HIGH);
 
-    analogWrite(ENBT, speed);
+    analogWrite(ENBT, speed2);
     digitalWrite(IN3T, HIGH);
     digitalWrite(IN4T, LOW);
   }
