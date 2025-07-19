@@ -1,16 +1,16 @@
 #ifndef LEDS_H
 #define LEDS_H
 
-#define LEFT_GREEN A4
-#define LEFT_RED A5
-#define LEFT_BLUE A6
+#define LEFT_GREEN 51
+#define LEFT_RED 49 
+#define LEFT_BLUE 53
 
-#define RIGHT_RED A8
-#define RIGHT_GREEN A9
-#define RIGHT_BLUE A10
+#define RIGHT_RED 48
+#define RIGHT_GREEN 52
+#define RIGHT_BLUE 50
 
-#define RIGHT_LDR A7
-#define LEFT_LDR A11
+#define RIGHT_LDR A14
+#define LEFT_LDR A15
 
 class Leds {
 
@@ -24,68 +24,88 @@ int RIGHT_RED_WHITE_VALUE;
 int RIGHT_GREEN_WHITE_VALUE; 
 int RIGHT_BLUE_WHITE_VALUE; 
 
+public: 
 char colorRight;
 char colorLeft;
 
-public: 
+  Leds() {
+    pinMode(RIGHT_RED, OUTPUT); 
+    pinMode(RIGHT_GREEN, OUTPUT); 
+    pinMode(RIGHT_BLUE, OUTPUT);
 
-void Leds::calibratingLeds() {
+    pinMode(LEFT_RED, OUTPUT); 
+    pinMode(LEFT_GREEN, OUTPUT); 
+    pinMode(LEFT_BLUE, OUTPUT);
 
-  analogWrite(LEFT_RED, 0);
-  analogWrite(RIGHT_RED, 0);
+    digitalWrite(RIGHT_LDR, HIGH);
+    digitalWrite(LEFT_LDR, HIGH);
+
+    //desligar leds inicialmente
+    digitalWrite(RIGHT_RED, HIGH);
+    digitalWrite(RIGHT_GREEN, HIGH);
+    digitalWrite(RIGHT_BLUE, HIGH);
+    digitalWrite(LEFT_RED, HIGH);
+    digitalWrite(LEFT_GREEN, HIGH);
+    digitalWrite(LEFT_BLUE, HIGH);
+  }
+
+void calibratingLeds() {
+
+  digitalWrite(LEFT_RED, LOW);
+  digitalWrite(RIGHT_RED, LOW);
   delay(100);
   LEFT_RED_WHITE_VALUE = analogRead(LEFT_LDR);
   RIGHT_RED_WHITE_VALUE = analogRead(RIGHT_LDR);
   delay(1000);
-  analogWrite(LEFT_RED, 255);
-  analogWrite(RIGHT_RED, 255);
+  digitalWrite(LEFT_RED, HIGH);
+  digitalWrite(RIGHT_RED, HIGH);
 
-  analogWrite(LEFT_GREEN, 0);
-  analogWrite(RIGHT_GREEN, 0);
+  digitalWrite(LEFT_GREEN, LOW);
+  digitalWrite(RIGHT_GREEN, LOW);
   delay(100);
   LEFT_GREEN_WHITE_VALUE = analogRead(LEFT_LDR);
   RIGHT_GREEN_WHITE_VALUE = analogRead(RIGHT_LDR);
   delay(1000);
-  analogWrite(LEFT_GREEN, 255);
-  analogWrite(RIGHT_GREEN, 255);
+  digitalWrite(LEFT_GREEN, HIGH);
+  digitalWrite(RIGHT_GREEN, HIGH);
 
-  analogWrite(LEFT_BLUE, 0);
-  analogWrite(RIGHT_BLUE, 0);
+  digitalWrite(LEFT_BLUE, LOW);
+  digitalWrite(RIGHT_BLUE, LOW);
   delay(100);
   LEFT_BLUE_WHITE_VALUE = analogRead(LEFT_LDR);
   RIGHT_BLUE_WHITE_VALUE = analogRead(RIGHT_LDR);
   delay(1000);
-  analogWrite(LEFT_BLUE, 255);
-  analogWrite(RIGHT_BLUE, 255);
+  digitalWrite(LEFT_BLUE, HIGH);
+  digitalWrite(RIGHT_BLUE, HIGH);
 }
 
-void Leds::ReadLdrOnGreen() {
-  analogWrite(LEFT_RED, 0);
-  analogWrite(RIGHT_RED, 0);
+void ReadLdrOnGreen() {
+  digitalWrite(LEFT_RED, LOW);
+  digitalWrite(RIGHT_RED, LOW);
   delay(100);
   int valueLED1RC = analogRead(RIGHT_LDR);
   int valueLED2RC = analogRead(LEFT_LDR);
   delay(10);
-  analogWrite(LEFT_RED, 255);
-  analogWrite(RIGHT_RED, 255);
+  digitalWrite(LEFT_RED, HIGH);
+  digitalWrite(RIGHT_RED, HIGH);
 
-  analogWrite(LEFT_GREEN, 0);
-  analogWrite(RIGHT_GREEN, 0);
+  digitalWrite(LEFT_GREEN, LOW);
+  digitalWrite(RIGHT_GREEN, LOW);
   delay(100);
   int valueLED1GC = analogRead(RIGHT_LDR);
   int valueLED2GC = analogRead(LEFT_LDR);
   delay(10);
-  analogWrite(LEFT_GREEN, 255);
-  analogWrite(RIGHT_GREEN, 255);
+  digitalWrite(LEFT_GREEN, HIGH);
+  digitalWrite(RIGHT_GREEN, HIGH);
 
-  analogWrite(LEFT_BLUE, 0);
-  analogWrite(RIGHT_BLUE, 0);
+  digitalWrite(LEFT_BLUE, LOW);
+  digitalWrite(RIGHT_BLUE, LOW);
   delay(100);
   int valueLED1BC = analogRead(RIGHT_LDR);
   int valueLED2BC = analogRead(LEFT_LDR);
   delay(10);
-  analogWrite(LEFT_BLUE, 255);
-  analogWrite(RIGHT_BLUE, 255);
+  digitalWrite(LEFT_BLUE, HIGH);
+  digitalWrite(RIGHT_BLUE, HIGH);
 
   //**************************COMPARANDO VALORES DO LED1**********************
  int valueSubtractionLED1R = valueLED1RC - RIGHT_RED_WHITE_VALUE;
@@ -109,6 +129,7 @@ void Leds::ReadLdrOnGreen() {
   else 
     colorRight = 'B';
   
+  }
   if (valueSubtractionLED2G < valueSubtractionLED2R && valueSubtractionLED2G < valueSubtractionLED2B) {
 
     //**************************COMPARANDO VALORES DO LED2**********************
@@ -121,15 +142,9 @@ void Leds::ReadLdrOnGreen() {
    
   else 
     colorLeft = 'B';
-  
-}
 
-char Leds::getColorRight() {
-  return colorRight;
 }
-char Leds::getColorLeft() {
-  return colorLeft;
-}
-
+  }
 };
+
 #endif

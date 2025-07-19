@@ -3,7 +3,7 @@
 
 #include <Ultrasonic.h>
 
-#define trigger 49
+#define trigger 24
 #define echo 22
 
 class Sensor {
